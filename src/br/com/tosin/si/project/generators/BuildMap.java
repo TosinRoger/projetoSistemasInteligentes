@@ -1,5 +1,6 @@
-package br.com.tosin.si.project.controllers;
+package br.com.tosin.si.project.generators;
 
+import br.com.tosin.si.project.models.Agent;
 import br.com.tosin.si.project.models.Environment;
 import br.com.tosin.si.project.models.ObjectInWorld;
 import br.com.tosin.si.project.utils.CONST;
@@ -12,6 +13,10 @@ public class BuildMap {
     private static final int WIDTH = 9;
     private static final int HEIGHT = 9;
 
+    /**
+     * Controi mapa com as especificacoes do projeto. Colocando Paredes, Objetivo e Agente na posicao inicial
+     * @return
+     */
     public static Environment buildMap() {
         Environment environment = new Environment(WIDTH, HEIGHT);
 
@@ -61,7 +66,7 @@ public class BuildMap {
         environment.addObstacle(new ObjectInWorld(8, 1, CONST.CODE_WALL));
         environment.addObstacle(new ObjectInWorld(8, 2, CONST.CODE_WALL));
 
-        environment.addObstacle(new ObjectInWorld(8, 0, CONST.CODE_MOBILE));
+//        environment.addObstacle(new Agent(8, 0));
 
         environment.addObstacle(new ObjectInWorld(2,6, CONST.CODE_TARGET));
 

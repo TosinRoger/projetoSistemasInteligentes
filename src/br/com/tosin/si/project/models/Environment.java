@@ -12,9 +12,6 @@ public class Environment {
     public int width;
     public int height;
 
-//	private List<ObjectInWorld> objectsInWorld = new ArrayList<>();
-
-
     public Environment(int width, int height) {
         this.width = width;
         this.height = height;

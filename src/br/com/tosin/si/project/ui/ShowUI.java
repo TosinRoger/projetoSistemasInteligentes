@@ -1,5 +1,6 @@
 package br.com.tosin.si.project.ui;
 
+import br.com.tosin.si.project.models.Agent;
 import br.com.tosin.si.project.models.ObjectInWorld;
 import br.com.tosin.si.project.utils.CONST;
 
@@ -41,5 +42,12 @@ public class ShowUI {
         }
         System.out.print("\n");
 
+    }
+
+    public static void agentHealth(Agent agent, String msg) {
+        if (msg != null)
+            System.out.println(msg);
+        System.out.println("O agente possui " + agent.health + " de energia");
+        System.out.println("O agente esta carregando " + agent.fruits.size() + " frutas");
     }
 }
