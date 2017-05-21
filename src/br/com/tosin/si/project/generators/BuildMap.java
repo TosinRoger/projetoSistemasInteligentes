@@ -34,41 +34,41 @@ public class BuildMap {
 
         environment.addObstacle(new ObjectInWorld(0, 0, CONST.CODE_WALL));
         environment.addObstacle(new ObjectInWorld(0, 1, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(0, 4, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(0, 5, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(0, 6, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(0, 7, CONST.CODE_WALL));
 
         environment.addObstacle(new ObjectInWorld(1, 0, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(1, 6, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(1, 7, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(1, 8, CONST.CODE_WALL));
 
-        environment.addObstacle(new ObjectInWorld(2, 3, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(2, 4, CONST.CODE_WALL));
         environment.addObstacle(new ObjectInWorld(2, 5, CONST.CODE_WALL));
 
+        environment.addObstacle(new ObjectInWorld(3, 2, CONST.CODE_WALL));
         environment.addObstacle(new ObjectInWorld(3, 3, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(3, 4, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(3, 5, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(3, 6, CONST.CODE_WALL));
 
+        environment.addObstacle(new ObjectInWorld(4, 0, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(4, 2, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(4, 3, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(4, 6, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(4, 7, CONST.CODE_WALL));
+
+        environment.addObstacle(new ObjectInWorld(5, 0, CONST.CODE_WALL));
         environment.addObstacle(new ObjectInWorld(5, 2, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(5, 3, CONST.CODE_WALL));
         environment.addObstacle(new ObjectInWorld(5, 5, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(5, 7, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(5, 6, CONST.CODE_WALL));
 
-        environment.addObstacle(new ObjectInWorld(6, 1, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(6, 4, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(6, 5, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(6, 7, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(6, 0, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(6, 3, CONST.CODE_WALL));
 
-        environment.addObstacle(new ObjectInWorld(7, 1, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(7, 4, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(7, 0, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(7, 5, CONST.CODE_WALL));
+        environment.addObstacle(new ObjectInWorld(7, 6, CONST.CODE_WALL));
         environment.addObstacle(new ObjectInWorld(7, 7, CONST.CODE_WALL));
 
-        environment.addObstacle(new ObjectInWorld(8, 1, CONST.CODE_WALL));
-        environment.addObstacle(new ObjectInWorld(8, 2, CONST.CODE_WALL));
 
 //        environment.addObstacle(new Agent(8, 0));
 
-        environment.addObstacle(new ObjectInWorld(2,6, CONST.CODE_TARGET));
+        environment.addObstacle(new ObjectInWorld(6,2, CONST.CODE_TARGET));
 
         return environment;
     }

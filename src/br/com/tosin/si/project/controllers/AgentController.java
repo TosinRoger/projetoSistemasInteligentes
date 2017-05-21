@@ -78,19 +78,19 @@ public class AgentController {
         Position newPosition = null;
 
         if (direction == DIRECTIONS.N) {
-            newPosition = new Position(agent.x - 1, agent.y);
+            newPosition = new Position(agent.x, agent.y- 1);
         } else if (direction == DIRECTIONS.S) {
-            newPosition = new Position(agent.x + 1, agent.y);
-        } else if (direction == DIRECTIONS.O) {
-            newPosition = new Position(agent.x, agent.y - 1);
-        } else if (direction == DIRECTIONS.L) {
             newPosition = new Position(agent.x, agent.y + 1);
+        } else if (direction == DIRECTIONS.O) {
+            newPosition = new Position(agent.x - 1, agent.y);
+        } else if (direction == DIRECTIONS.L) {
+            newPosition = new Position(agent.x + 1, agent.y);
         } else if (direction == DIRECTIONS.NO) {
             newPosition = new Position(agent.x - 1, agent.y - 1);
         } else if (direction == DIRECTIONS.ND) {
-            newPosition = new Position(agent.x - 1, agent.y + 1);
+            newPosition = new Position(agent.x + 1, agent.y - 1);
         } else if (direction == DIRECTIONS.SO) {
-            newPosition = new Position(agent.x + 1, agent.y + -1);
+            newPosition = new Position(agent.x - 1, agent.y + 1);
         } else if (direction == DIRECTIONS.SD) {
             newPosition = new Position(agent.x + 1, agent.y + 1);
         }

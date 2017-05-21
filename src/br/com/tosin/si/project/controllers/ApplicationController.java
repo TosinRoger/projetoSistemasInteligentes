@@ -17,7 +17,7 @@ public class ApplicationController {
         Environment environment = BuildMap.buildMap();
         ShowUI.showWorldRender(environment.world);
 
-        Agent agent = new Agent(8, 0);
+        Agent agent = new Agent(0, 8);
 
         environment.addObstacle(agent);
 

@@ -16,23 +16,28 @@ public class ShowUI {
         }
         System.out.print("\n");
 
+        // plota matrix
         for (int i = 0; i < matrix.length; i++) {
-            System.out.format("%3d ", (matrix.length - i));
+            // index linha (valores y)
+            System.out.format("%3d ", (matrix.length - i - 1));
             for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == null)
+
+                // i == y e j == x
+                if (matrix[j][i] == null)
                     System.out.print((char) CONST.CODE_BLANK);
                 else
-                    System.out.print((char)matrix[i][j].code);
+                    System.out.print((char)matrix[j][i].code);
             }
             System.out.print("\n");
         }
 
         System.out.print("    ");
         for (int i = 0; i < matrix[0].length; i++) {
-            int temp = i + 1;
+            int temp = i ;
             if (temp > 9)
                 temp = temp -10;
 
+            // index coluna (valores X)
             System.out.format("%1d", temp);
         }
         System.out.print("\n");
