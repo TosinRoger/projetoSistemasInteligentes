@@ -21,6 +21,8 @@ public class GameController {
 //        agentController.buildPlanLRTA();
 
         boolean gaming = true;
+        boolean agentWin = false;
+        boolean agentDead = false;
 
         while (gaming) {
             /*
@@ -41,6 +43,7 @@ public class GameController {
             if (environmentController.canMove(nextPosition, agentController.getAgent())) {
                 if (environmentController.isTarget(agentController.getAgent().getPosition(), nextPosition)) {
                     gaming = false;
+                    agentWin = true;
                 }
 
                 Fruit fruit = environmentController.getFruitNextMove(nextPosition);
@@ -52,8 +55,13 @@ public class GameController {
                 if (agentController.isAlive()) {
                     agentController.spendEnergyToWalk();
                     environmentController.updateEnvironment(nextPosition, agent);
-                } else
+                }
+
+                // confere se o agente esta vivo depois de andar
+                if (!agentController.isAlive()) {
                     gaming = false;
+                    agentDead = true;
+                }
 
 
                 // adiciona a fruta quando o agente se mover caso ele tenha deixado na interacao anterior
@@ -61,7 +69,12 @@ public class GameController {
             }
             InteractClientUser.confirmNextMove();
         }
-        ShowUI.gameIsOver();
+        if (agentDead)
+            ShowUI.gameIsOver("O agente morreu );");
+        else if (agentWin)
+            ShowUI.gameIsOver("O agente venceu \\o/");
+        else
+            ShowUI.gameIsOver("O jogo foi finalizado!");
     }
 
     public Position getAgentPosition(Agent agent) {

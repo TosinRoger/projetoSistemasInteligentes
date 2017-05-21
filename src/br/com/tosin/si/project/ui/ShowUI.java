@@ -56,7 +56,8 @@ public class ShowUI {
         System.out.println("O agente esta carregando " + agent.fruits.size() + " frutas");
     }
 
-    public static void gameIsOver() {
+    public static void gameIsOver(String msg) {
         System.out.println("O jogo chegou ao fim!");
+        System.out.println(msg);
     }
 }

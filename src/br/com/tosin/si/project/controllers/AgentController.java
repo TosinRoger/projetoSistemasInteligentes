@@ -5,8 +5,9 @@ import br.com.tosin.si.project.algorithms.DecideTheFruit;
 import br.com.tosin.si.project.constants.DECIDE_FRUIT;
 import br.com.tosin.si.project.constants.DIRECTIONS;
 import br.com.tosin.si.project.constants.ENERGY_EXPENDITURE;
-import br.com.tosin.si.project.constants.ENERGY_FRUITS;
-import br.com.tosin.si.project.models.*;
+import br.com.tosin.si.project.models.Agent;
+import br.com.tosin.si.project.models.Fruit;
+import br.com.tosin.si.project.models.Position;
 import br.com.tosin.si.project.ui.InteractClientUser;
 import br.com.tosin.si.project.utils.SortFruit;
 
@@ -49,6 +50,8 @@ public class AgentController {
                 iterator.remove();
             }
         }
+        if (getAgent().health > 600)
+            getAgent().health = 600;
 
         readPositionInWorld();
         buildPlanLRTA();
@@ -57,22 +60,12 @@ public class AgentController {
     private DIRECTIONS getDirection(){
         // se tem um plano executa o plano,
         // senao pergunta para o usuario
-        if (!agent.plans.isEmpty()) {
-            return agent.plans.remove(0);
+        if (!getAgent().plans.isEmpty()) {
+            return getAgent().plans.remove(0);
         }
 
         DIRECTIONS direction = InteractClientUser.getDirection();
 
-//        if (direction.equals("PLAN")) {
-////            agent.plans = BuildStaticEnvironment.makePlain1();
-//            String plan = "";
-//            if (!agent.plans.isEmpty()) {
-//                plan = agent.plans.remove(0);
-//            }
-//
-//            return plan;
-//        }
-//        else
         return direction;
     }
 
@@ -86,21 +79,21 @@ public class AgentController {
         Position newPosition = null;
 
         if (direction == DIRECTIONS.N) {
-            newPosition = new Position(agent.x, agent.y- 1);
+            newPosition = new Position(getAgent().x, getAgent().y- 1);
         } else if (direction == DIRECTIONS.S) {
-            newPosition = new Position(agent.x, agent.y + 1);
+            newPosition = new Position(getAgent().x, getAgent().y + 1);
         } else if (direction == DIRECTIONS.O) {
-            newPosition = new Position(agent.x - 1, agent.y);
+            newPosition = new Position(getAgent().x - 1, getAgent().y);
         } else if (direction == DIRECTIONS.L) {
-            newPosition = new Position(agent.x + 1, agent.y);
+            newPosition = new Position(getAgent().x + 1, getAgent().y);
         } else if (direction == DIRECTIONS.NO) {
-            newPosition = new Position(agent.x - 1, agent.y - 1);
+            newPosition = new Position(getAgent().x - 1, getAgent().y - 1);
         } else if (direction == DIRECTIONS.ND) {
-            newPosition = new Position(agent.x + 1, agent.y - 1);
+            newPosition = new Position(getAgent().x + 1, getAgent().y - 1);
         } else if (direction == DIRECTIONS.SO) {
-            newPosition = new Position(agent.x - 1, agent.y + 1);
+            newPosition = new Position(getAgent().x - 1, getAgent().y + 1);
         } else if (direction == DIRECTIONS.SD) {
-            newPosition = new Position(agent.x + 1, agent.y + 1);
+            newPosition = new Position(getAgent().x + 1, getAgent().y + 1);
         }
 
         return newPosition;
@@ -109,10 +102,10 @@ public class AgentController {
     public Position readPositionInWorld() {
         gameController.renderWorld();
 
-        Position position = gameController.getAgentPosition(agent);
+        Position position = gameController.getAgentPosition(getAgent());
 
         if (position != null)
-            agent.setPosition(position);
+            getAgent().setPosition(position);
 
         return position;
     }
@@ -123,14 +116,14 @@ public class AgentController {
 
     public void buildPlanLRTA() {
 //        cria um plano e coloca em plain
-        if (agent.plans == null) {
-            agent.plans = new ArrayList<>();
+        if (getAgent().plans == null) {
+            getAgent().plans = new ArrayList<>();
         }
 
-        DIRECTIONS d = lrta.findNextPosition(agent.getPosition());
+        DIRECTIONS d = lrta.findNextPosition(getAgent().getPosition());
 
         if (d != null)
-            agent.plans.add(d);
+            getAgent().plans.add(d);
     }
 
     public boolean leaveFruit(Fruit fruit) {
