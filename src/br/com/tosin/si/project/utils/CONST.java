@@ -8,5 +8,5 @@ public class CONST {
     public static final int CODE_WALL   = 79;
     public static final int CODE_MOBILE = 164;
     public static final int CODE_TARGET = 165;
-    public static final int CODE_FRUIT  = 169;
+    public static final int CODE_FRUIT  = 43;
 }

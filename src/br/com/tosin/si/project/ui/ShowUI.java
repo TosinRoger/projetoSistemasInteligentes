@@ -55,4 +55,8 @@ public class ShowUI {
         System.out.println("O agente possui " + agent.health + " de energia");
         System.out.println("O agente esta carregando " + agent.fruits.size() + " frutas");
     }
+
+    public static void gameIsOver() {
+        System.out.println("O jogo chegou ao fim!");
+    }
 }

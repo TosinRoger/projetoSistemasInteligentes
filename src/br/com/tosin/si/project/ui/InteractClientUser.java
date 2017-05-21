@@ -79,4 +79,8 @@ public class InteractClientUser {
             return false;
     }
 
+    public static void confirmNextMove() {
+        Scanner scanner = new Scanner(System.in);
+        String readString = scanner.nextLine();
+    }
 }

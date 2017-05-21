@@ -1,6 +1,7 @@
 package br.com.tosin.si.project.controllers;
 
 import br.com.tosin.si.project.models.*;
+import br.com.tosin.si.project.ui.InteractClientUser;
 import br.com.tosin.si.project.ui.ShowUI;
 
 /**
@@ -58,9 +59,9 @@ public class GameController {
                 // adiciona a fruta quando o agente se mover caso ele tenha deixado na interacao anterior
 
             }
-
+            InteractClientUser.confirmNextMove();
         }
-
+        ShowUI.gameIsOver();
     }
 
     public Position getAgentPosition(Agent agent) {
