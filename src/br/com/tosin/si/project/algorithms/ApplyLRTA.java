@@ -5,6 +5,9 @@ import br.com.tosin.si.project.models.ObjectInWorld;
 import br.com.tosin.si.project.models.Position;
 import br.com.tosin.si.project.utils.CONST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by roger on 20/05/17.
  */
@@ -21,11 +24,11 @@ public class ApplyLRTA {
     private static final double COST_BASE = 1;
     private static final double COST_DIAGONAL = 1.5;
 
-
     private double[][] map = new double[WIDTH][HEIGHT];
+    private List<Position> visited;
 
     public ApplyLRTA() {
-
+        visited = new ArrayList<>();
         costRecovered = 0.0;
     }
 
@@ -40,51 +43,63 @@ public class ApplyLRTA {
         DIRECTIONS nextDirections = null;
         double best = COST_INFINITE;
 
+        if (alreadyVisited(currentPosition)) {
+            cost[currentPosition.x][currentPosition.y] += COST_BASE;
+        }
+
         // visinho norte
         if ( currentPosition.y != 0 &&  (COST_BASE + cost[currentPosition.x][currentPosition.y - 1]) < best) {
             best = (COST_BASE + cost[currentPosition.x][currentPosition.y - 1]);
+            visited.add(new Position(currentPosition.x, currentPosition.y - 1));
             nextDirections = DIRECTIONS.N;
         }
 
         // visinho sul
         if ( currentPosition.y != (HEIGHT - 1) &&  (COST_BASE + cost[currentPosition.x][currentPosition.y + 1]) < best) {
             best = (COST_BASE + cost[currentPosition.x][currentPosition.y + 1]);
+            visited.add(new Position(currentPosition.x, currentPosition.y + 1));
             nextDirections = DIRECTIONS.S;
         }
 
         // visinho oeste
         if ( currentPosition.x != 0 &&  (COST_BASE + cost[currentPosition.x - 1][currentPosition.y]) < best) {
             best = (COST_BASE + cost[currentPosition.x - 1][currentPosition.y]);
+            visited.add(new Position(currentPosition.x - 1, currentPosition.y));
             nextDirections = DIRECTIONS.O;
         }
 
         // visinho leste
-        if ( currentPosition.y != (WIDTH -1) &&  (COST_BASE + cost[currentPosition.x + 1][currentPosition.y]) < best) {
+        if ( currentPosition.x != (WIDTH -1) &&  (COST_BASE + cost[currentPosition.x + 1][currentPosition.y]) < best) {
             best = (COST_BASE + cost[currentPosition.x + 1][currentPosition.y]);
+            visited.add(new Position(currentPosition.x + 1, currentPosition.y));
             nextDirections = DIRECTIONS.L;
         }
 
         // visinho nordeste
         if ((currentPosition.x != (WIDTH - 1) && currentPosition.y != 0) && (COST_BASE + cost[currentPosition.x + 1][currentPosition.y - 1]) < best) {
             best = (COST_DIAGONAL + cost[currentPosition.x + 1][currentPosition.y - 1]);
+            visited.add(new Position(currentPosition.x + 1, currentPosition.y - 1));
             nextDirections = DIRECTIONS.ND;
         }
 
         // visinho noroeste
         if ((currentPosition.x != 0 && currentPosition.y != 0) && (COST_BASE + cost[currentPosition.x - 1][currentPosition.y - 1]) < best) {
             best = (COST_DIAGONAL + cost[currentPosition.x - 1][currentPosition.y - 1]);
+            visited.add(new Position(currentPosition.x - 1, currentPosition.y - 1));
             nextDirections = DIRECTIONS.NO;
         }
 
         // visinho suldeste
         if ((currentPosition.x != (WIDTH - 1) && currentPosition.y != (HEIGHT - 1)) && (COST_BASE + cost[currentPosition.x + 1][currentPosition.y + 1]) < best) {
             best = COST_DIAGONAL + cost[currentPosition.x + 1][currentPosition.y + 1];
+            visited.add(new Position(currentPosition.x + 1, currentPosition.y + 1));
             nextDirections = DIRECTIONS.SD;
         }
 
         // visinho suldoeste
         if ((currentPosition.x != 0 && currentPosition.y != (HEIGHT - 1)) && (COST_BASE + cost[currentPosition.x - 1][currentPosition.y + 1]) < best) {
             best = COST_DIAGONAL + cost[currentPosition.x - 1][currentPosition.y + 1];
+            visited.add(new Position(currentPosition.x - 1, currentPosition.y + 1));
             nextDirections = DIRECTIONS.SD;
         }
 
@@ -121,5 +136,13 @@ public class ApplyLRTA {
                 }
             }
         }
+    }
+
+    private boolean alreadyVisited(Position currentPosition) {
+        for (Position item : visited) {
+            if (item.x == currentPosition.x && item.y == currentPosition.y)
+                return true;
+        }
+        return false;
     }
 }

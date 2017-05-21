@@ -139,7 +139,7 @@ public class AgentController {
     }
 
     public boolean isAlive() {
-        return getAgent().health > -1000000;
+        return getAgent().health > 0;
     }
 
     public void spendEnergyToWalk() {

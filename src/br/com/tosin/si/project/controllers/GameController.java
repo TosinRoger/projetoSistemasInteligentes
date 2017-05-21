@@ -67,7 +67,8 @@ public class GameController {
                 // adiciona a fruta quando o agente se mover caso ele tenha deixado na interacao anterior
 
             }
-            InteractClientUser.confirmNextMove();
+            sleep();
+//            InteractClientUser.confirmNextMove();
         }
         if (agentDead)
             ShowUI.gameIsOver("O agente morreu );");
@@ -88,4 +89,18 @@ public class GameController {
     public ObjectInWorld[][] getWorld() {
         return environmentController.getWorld();
     }
+
+    private void sleep() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(800);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).run();
+    }
+
 }
