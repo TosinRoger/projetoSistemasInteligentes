@@ -16,8 +16,6 @@ public class ApplyLRTA {
     public static final int WIDTH  = 9;
     public static final int HEIGHT = 9;
 
-    private static final int X_TARGET = 6;
-    private static final int Y_TARGET = 2;
     private static final int COST_INFINITE = 1000000;
 
     private static final double COST_BASE = 1;
@@ -101,10 +99,10 @@ public class ApplyLRTA {
 //        j == x
         for (int i = 0; i < cost.length; i++) {
             for (int j = 0; j < cost[i].length; j++) {
-                double x = Math.abs(j - X_TARGET);
+                double x = Math.abs(j - CONST.TARGET_X);
                 x = Math.pow(x, 2);
 
-                double y = Math.abs(i - Y_TARGET);
+                double y = Math.abs(i - CONST.TARGET_Y);
                 y = Math.pow(y, 2);
 
                 double distance = x + y;

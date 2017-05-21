@@ -65,10 +65,7 @@ public class BuildMap {
         environment.addObstacle(new ObjectInWorld(7, 6, CONST.CODE_WALL));
         environment.addObstacle(new ObjectInWorld(7, 7, CONST.CODE_WALL));
 
-
-//        environment.addObstacle(new Agent(8, 0));
-
-        environment.addObstacle(new ObjectInWorld(6,2, CONST.CODE_TARGET));
+        environment.addObstacle(new ObjectInWorld(CONST.TARGET_X,CONST.TARGET_Y, CONST.CODE_TARGET));
 
         return environment;
     }
