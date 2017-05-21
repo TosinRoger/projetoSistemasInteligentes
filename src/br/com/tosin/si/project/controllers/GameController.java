@@ -17,11 +17,11 @@ public class GameController {
         agentController = new AgentController(this, agent);
 
         // agente precisa contruir o plano
-        agentController.buildPlanRTLA();
+//        agentController.buildPlanLRTA();
 
         boolean gaming = true;
 
-        while(gaming) {
+        while (gaming) {
             /*
                 agente diz qual e o movimento
                 verifica no mapa se pode move
@@ -41,20 +41,19 @@ public class GameController {
                 if (environmentController.isTarget(agentController.getAgent().getPosition(), nextPosition)) {
                     gaming = false;
                 }
-                else {
-                    Fruit fruit = environmentController.getFruitNextMove(nextPosition);
-                    if (agentController.leaveFruit(fruit)) {
 
-                    } else {
-                        environmentController.removeFruit(fruit);
-                    }
-                    if (agentController.isAlive()) {
-                        agentController.spendEnergyToWalk();
-                        environmentController.updateEnvironment(nextPosition, agent);
-                    }
-                    else
-                        gaming = false;
+                Fruit fruit = environmentController.getFruitNextMove(nextPosition);
+                if (agentController.leaveFruit(fruit)) {
+
+                } else {
+                    environmentController.removeFruit(fruit);
                 }
+                if (agentController.isAlive()) {
+                    agentController.spendEnergyToWalk();
+                    environmentController.updateEnvironment(nextPosition, agent);
+                } else
+                    gaming = false;
+
 
                 // adiciona a fruta quando o agente se mover caso ele tenha deixado na interacao anterior
 
@@ -72,5 +71,7 @@ public class GameController {
         ShowUI.showWorldRender(environmentController.getWorld());
     }
 
-
+    public ObjectInWorld[][] getWorld() {
+        return environmentController.getWorld();
+    }
 }

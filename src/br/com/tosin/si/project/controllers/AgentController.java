@@ -1,5 +1,6 @@
 package br.com.tosin.si.project.controllers;
 
+import br.com.tosin.si.project.algorithms.ApplyLRTA;
 import br.com.tosin.si.project.algorithms.DecideTheFruit;
 import br.com.tosin.si.project.constants.DECIDE_FRUIT;
 import br.com.tosin.si.project.constants.DIRECTIONS;
@@ -9,6 +10,7 @@ import br.com.tosin.si.project.models.*;
 import br.com.tosin.si.project.ui.InteractClientUser;
 import br.com.tosin.si.project.utils.SortFruit;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -19,10 +21,13 @@ public class AgentController {
 
     private GameController gameController;
     private Agent agent;
+    private ApplyLRTA lrta;
 
     public AgentController(GameController gameController, Agent agent) {
         this.gameController = gameController;
         this.agent = agent;
+        this.lrta = new ApplyLRTA();
+        this.lrta.configDefaultCust(gameController.getWorld());
     }
 
     /**
@@ -44,6 +49,9 @@ public class AgentController {
                 iterator.remove();
             }
         }
+
+        readPositionInWorld();
+        buildPlanLRTA();
     }
 
     private DIRECTIONS getDirection(){
@@ -65,7 +73,7 @@ public class AgentController {
 //            return plan;
 //        }
 //        else
-            return direction;
+        return direction;
     }
 
     public Position moveTo() {
@@ -113,11 +121,21 @@ public class AgentController {
         return agent;
     }
 
-    public void buildPlanRTLA() {
+    public void buildPlanLRTA() {
 //        cria um plano e coloca em plain
+        if (agent.plans == null) {
+            agent.plans = new ArrayList<>();
+        }
+
+        DIRECTIONS d = lrta.findNextPosition(agent.getPosition());
+
+        if (d != null)
+            agent.plans.add(d);
     }
 
     public boolean leaveFruit(Fruit fruit) {
+        if (fruit == null)
+            return true;
         DECIDE_FRUIT decideFruit = DecideTheFruit.decide(fruit);
         if (decideFruit == DECIDE_FRUIT.LEAVE)
             return true;
@@ -128,7 +146,7 @@ public class AgentController {
     }
 
     public boolean isAlive() {
-        return getAgent().health > 0;
+        return getAgent().health > -10000;
     }
 
     public void spendEnergyToWalk() {

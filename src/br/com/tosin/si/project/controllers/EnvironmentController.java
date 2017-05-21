@@ -32,7 +32,11 @@ public class EnvironmentController extends Physics {
     }
 
     public Fruit getFruitNextMove(Position position) {
-        return (Fruit) environment.world[position.x][position.y];
+        Object object = environment.world[position.x][position.y];
+        if (object instanceof Fruit)
+            return (Fruit) environment.world[position.x][position.y];
+        else
+            return null;
     }
 
     public void updateEnvironment(Position newPos, Agent agent) {

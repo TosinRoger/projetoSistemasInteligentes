@@ -13,7 +13,7 @@ public class Physics implements PhysicsInterface {
     @Override
     public boolean moveTo(ObjectInWorld[][] world, Position oldPos, Position newPos) {
         if (newPos.x >= 0 && newPos.x < world.length && newPos.y >= 0 && newPos.y < world[0].length) {
-            if (world[newPos.x][newPos.y] == null || world[newPos.x][newPos.y] instanceof Fruit) {
+            if (world[newPos.x][newPos.y] == null || world[newPos.x][newPos.y] instanceof Fruit || world[newPos.x][newPos.y].code == CONST.CODE_TARGET) {
                 return true;
             }
             else {
