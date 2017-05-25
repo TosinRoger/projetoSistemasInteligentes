@@ -8,6 +8,7 @@ import br.com.tosin.si.project.constants.ENERGY_EXPENDITURE;
 import br.com.tosin.si.project.models.Agent;
 import br.com.tosin.si.project.models.Fruit;
 import br.com.tosin.si.project.models.Position;
+import br.com.tosin.si.project.ui.CollectDataToID3;
 import br.com.tosin.si.project.ui.InteractClientUser;
 import br.com.tosin.si.project.utils.SortFruit;
 
@@ -23,12 +24,14 @@ public class AgentController {
     private GameController gameController;
     private Agent agent;
     private ApplyLRTA lrta;
+    private boolean hasID3;
 
-    public AgentController(GameController gameController, Agent agent) {
+    public AgentController(GameController gameController, Agent agent, boolean hasID3) {
         this.gameController = gameController;
         this.agent = agent;
         this.lrta = new ApplyLRTA();
         this.lrta.configDefaultCust(gameController.getWorld());
+        this.hasID3 = hasID3;
     }
 
     /**
@@ -36,17 +39,17 @@ public class AgentController {
      */
     public void reason() {
 
-
+        // se energia for melhor que 200 come a fruta
         Collections.sort(getAgent().fruits, new SortFruit());
-
 
         Iterator<Fruit> iterator = getAgent().fruits.iterator();
 
         while (iterator.hasNext()) {
             Fruit fruit = iterator.next();
 
-            if (getAgent().health + fruit.getEnergy() <= ENERGY_EXPENDITURE.MAX_ENERGY_AGENT) {
+            if (fruit != null && getAgent().health + fruit.getEnergy() <= ENERGY_EXPENDITURE.MAX_ENERGY_AGENT) {
                 getAgent().health += fruit.getEnergy();
+                CollectDataToID3.collect(fruit, getAgent().health > 600 ? 600 : getAgent().health);
                 iterator.remove();
             }
         }
@@ -127,15 +130,22 @@ public class AgentController {
     }
 
     public boolean leaveFruit(Fruit fruit) {
-        if (fruit == null)
-            return true;
-        DECIDE_FRUIT decideFruit = DecideTheFruit.decide(fruit);
-        if (decideFruit == DECIDE_FRUIT.LEAVE)
-            return true;
-        else if (decideFruit == DECIDE_FRUIT.LOAD || decideFruit == DECIDE_FRUIT.EAT)
-            getAgent().fruits.add(fruit);
+        // sem a aprendizagem pega todas as frutas
+        getAgent().fruits.add(fruit);
 
-        return false;
+        return true;
+//
+//         com a aprendizagem deve chamar a logica do ID3 em DecideTheFruit
+//
+//        if (fruit == null)
+//            return true;
+//        DECIDE_FRUIT decideFruit = DecideTheFruit.decide(fruit);
+//        if (decideFruit == DECIDE_FRUIT.LEAVE)
+//            return true;
+//        else if (decideFruit == DECIDE_FRUIT.LOAD || decideFruit == DECIDE_FRUIT.EAT)
+//            getAgent().fruits.add(fruit);
+//
+//        return false;
     }
 
     public boolean isAlive() {

@@ -13,9 +13,10 @@ public class GameController {
     private EnvironmentController environmentController;
 
 
-    public void playGame(Environment environment, Agent agent) {
+    public void playGame(ApplicationController application, Environment environment, Agent agent) {
+        this.application = application;
         environmentController = new EnvironmentController(this, environment);
-        agentController = new AgentController(this, agent);
+        agentController = new AgentController(this, agent, false);
 
         // agente precisa contruir o plano
 //        agentController.buildPlanLRTA();
@@ -67,15 +68,21 @@ public class GameController {
                 // adiciona a fruta quando o agente se mover caso ele tenha deixado na interacao anterior
 
             }
-            sleep();
+//            sleep();
 //            InteractClientUser.confirmNextMove();
         }
-        if (agentDead)
+        if (agentDead) {
             ShowUI.gameIsOver("O agente morreu );");
-        else if (agentWin)
+            application.getStatitcs().addPlayDied();
+        }
+        else if (agentWin) {
             ShowUI.gameIsOver("O agente venceu \\o/");
-        else
+            application.getStatitcs().addGameWon();
+        }
+        else {
             ShowUI.gameIsOver("O jogo foi finalizado!");
+            application.getStatitcs().totalGame++;
+        }
     }
 
     public Position getAgentPosition(Agent agent) {

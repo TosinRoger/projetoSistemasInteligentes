@@ -2,6 +2,7 @@ package br.com.tosin.si.project.ui;
 
 import br.com.tosin.si.project.models.Agent;
 import br.com.tosin.si.project.models.ObjectInWorld;
+import br.com.tosin.si.project.models.Statitcs;
 import br.com.tosin.si.project.utils.CONST;
 
 /**
@@ -59,5 +60,14 @@ public class ShowUI {
     public static void gameIsOver(String msg) {
         System.out.println("O jogo chegou ao fim!");
         System.out.println(msg);
+    }
+
+    public static void printStatics(Statitcs statitcs) {
+        System.out.println("Estatisticas ");
+        System.out.println("Numero de jogos: " + statitcs.totalGame);
+        System.out.println("Numero de jogos ganhos: " + statitcs.gameWon);
+        System.out.println("Numero de jogos perdidos: " + statitcs.playerDied);
+
+
     }
 }

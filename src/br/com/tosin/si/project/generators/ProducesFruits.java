@@ -27,7 +27,7 @@ public class ProducesFruits {
         return environment;
     }
 
-    private static Fruit produceFruit(int x, int y) {
+    public static Fruit produceFruit(int x, int y) {
         Random random = new Random();
         Fruit fruit = new Fruit(x, y);
 
